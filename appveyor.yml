@@ -3,6 +3,7 @@ environment:
   MINOR: 1
   IMEPATCH: 26.1-rc1
   CMIGEMO: 1.3-mingw64-20180629
+  PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
 
   matrix:
     - MSYS2_ARCH: x86_64
