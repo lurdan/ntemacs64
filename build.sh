@@ -15,7 +15,7 @@ _prepare () {
 _extract () {
   tar zxf /c/emacs-${EMACSVER}.tar.gz -C $WORKDIR
   cd ${WORKDIR}/emacs-*
-  for PATCH in /c/*.diff
+  for PATCH in $(ls -r /c/*.diff)
   do
     patch -p0 < $PATCH
   done
