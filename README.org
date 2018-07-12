@@ -1,0 +1,9 @@
+* NTEmacs64 build
+
+[[https://ci.appveyor.com/project/lurdan/ntemacs64][https://ci.appveyor.com/api/projects/status/9v8jftjg2a6w4m2r?svg=true]]
+
+** feature
+- apply IME patch
+- apply disable IME patch
+- cmigemo included
+

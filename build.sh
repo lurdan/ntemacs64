@@ -9,7 +9,7 @@ DEPPKGS=$(echo mingw-w64-x86_64-{xpm-nox,libtiff,giflib,libpng,libjpeg-turbo,lib
 
 _prepare () {
   pacman --noconfirm -Syu
-  pacman --needed --noconfirm -S base-devel $DEPPKGS $DEPPKGS_PDF
+  pacman --needed --noconfirm -S base-devel unzip $DEPPKGS $DEPPKGS_PDF
 }
 
 _extract () {
