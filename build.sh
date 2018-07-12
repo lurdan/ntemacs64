@@ -1,8 +1,8 @@
 #!/bin/bash
 
-WORKDIR=~/tmp
 EMACSVER=${1:-26.1}
-TARGET=/c/emacs
+TARGET=${2:-/c/emacs}
+WORKDIR=${3:-~/tmp}
 
 DEPLIBS="libffi-6.dll libgcc_s_seh-1.dll libgmp-10.dll libhogweed-4.dll libiconv-2.dll libidn2-0.dll libintl-8.dll libnettle-6.dll libp11-kit-0.dll libtasn1-6.dll libunistring-2.dll libwinpthread-1.dll"
 DEPPKGS=$(echo mingw-w64-x86_64-{xpm-nox,libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls,lcms2,zlib,jansson})
