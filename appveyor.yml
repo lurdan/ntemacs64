@@ -21,7 +21,6 @@ cache:
   - C:\emacs-%IMEPATCH%-w32-ime.diff
   - C:\emacs-%IMEPATCH%-disable-w32-ime.diff
   - C:\cmigemo-%CMIGEMO%.zip
-  - C:\msys64
 
 build_script:
   - cd C:\
@@ -36,7 +35,16 @@ build_script:
 
 artifacts:
   - path: emacs26
-    name: NTEmacs64 (%MAJOR%.%MINOR%)
+    name: ntemacs64-%MAJOR%.%MINOR%
 
-#deploy: off
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: ibHrr94A+Ztsi5eecmGFtAslcXapJxGgNoyLsK8owPMCVbYBqiHvXmwCMBArcav/
+  artifact: /ntemacs64-.*\.zip/
+  draft: false
+  prerelease: false
+  on:
+    branch:master
+    appvayor_repo_tag: true
 
