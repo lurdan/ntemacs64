@@ -13,7 +13,7 @@ _prepare () {
 }
 
 _extract () {
-  tar zxf /c/emacs-${EMACSVER}.tgz -C $WORKDIR
+  tar zxf /c/emacs-${EMACSVER}.tar.gz -C $WORKDIR
   cd ${WORKDIR}/emacs-*
   for PATCH in /c/*.diff
   do
