@@ -46,5 +46,5 @@ deploy:
   prerelease: false
   on:
     branch:master
-    appvayor_repo_tag: true
+    appveyor_repo_tag: true
 
