@@ -13,14 +13,15 @@ _prepare () {
 }
 
 _extract () {
-  tar zxf emacs-${EMACSVER}.tgz -C /c/
-  cd /c/emacs-*
-  patch -p0 < ${WORKDIR}/emacs-*-w32-ime.diff
-  patch -p0 < ${WORKDIR}/emacs-*-disable-w32-ime.diff
+  tar zxf /c/emacs-${EMACSVER}.tgz -C $WORKDIR
+  cd ${WORKDIR}/emacs-*
+  for PATCH in /c/*.diff
+  do
+    patch -p0 < $PATCH
+  done
 }
 
 _build () {
-  cd /c/emacs-*
   #autoconf
   ./autogen.sh
   PKG_CONFIG_PATH=/mingw64/lib/pkgconfig/ CFLAGS='-O2 -march=x86-64 -mtune=generic -static -s -g0' \
@@ -34,22 +35,22 @@ _build () {
                 --with-modules && make bootstrap
 }
 
-_cmigemo () {
-  unzip ${WORKDIR}/cmigemo*.zip
-  cp cmigemo-mingw64/* ${TARGET}/bin
-  cp -R cmigemo-mingw64/share/migemo ${TARGET}/share/
-}
-
 _install () {
-  cd /c/emacs-*
   make install-strip
   ( cd /mingw64/bin/; cp $DEPLIBS ${TARGET}/bin )
   cp $( pacman -Ql $DEPPKGS | awk '/bin\/.*\.dll$/{print $2}') ${TARGET}/bin
 }
 
+_cmigemo () {
+  cd ${WORKDIR}
+  unzip /c/cmigemo*.zip
+  cp cmigemo-mingw64/bin/* ${TARGET}/bin
+  cp -R cmigemo-mingw64/share/migemo ${TARGET}/share/
+}
+
 _prepare
 _extract
 _build
-_cmigemo
 _install
+_cmigemo
 
