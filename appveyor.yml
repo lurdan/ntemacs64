@@ -1,42 +1,38 @@
 environment:
   MAJOR: 26
   MINOR: 1
-  IMEPATCH: 26.1-rc1
-  CMIGEMO: 1.3-mingw64-20180629
+  PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
 
   matrix:
     - MSYS2_ARCH: x86_64
       MSYSTEM: MINGW64
-    - MSYS2_ARCH: i686
-      MSYSTEM: MINGW32
+
+init:
+  - ps: Update-AppveyorBuild -Version "$env:MAJOR.$env:MINOR-$(Get-Date -format yyyyMMdd).$env:appveyor_build_number"
 
 branches:
   only:
     - master
 
 cache:
-  - emacs-%MAJOR%.%MINOR%.tar.gz
-  - emacs-%MAJOR%.%MINOR%.tar.gz.sig
-  - emacs-%IMEPATCH%-w32-ime.diff
-  - emacs-%IMEPATCH%-disable-w32-ime.diff
-  - cmigemo-%CMIGEMO%.zip
+  - src
+  - emacs-%MAJOR%.%MINOR%
 
 build_script:
-  - pwd
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - curl -O http://ftp.gnu.org/gnu/emacs/emacs-%MAJOR%.%MINOR%.tar.gz
-  - curl -O http://ftp.gnu.org/gnu/emacs/emacs-%MAJOR%.%MINOR%.tar.gz.sig
-
-  - curl -O https://gist.githubusercontent.com/rzl24ozi/ee4457df2f54c5f3ca0d02b56e371233/raw/16794e5883211049aed08c681f71240fa32cc28f/emacs-26.1-rc1-w32-ime.diff
-  - curl -O https://gist.githubusercontent.com/rzl24ozi/da3370acb767096ce11fe867c6d9da6a/raw/1e0c1e44c9042b182e499f94fd0b5ebfc9cd94a7/emacs-26.1-rc1-disable-w32-ime.diff
-  - curl -O https://github.com/mhatta/emacs-26-x86_64-win-ime/raw/master/cmigemo-%CMIGEMO%.zip
-
-  - pacman -Syu --noconfirm
-  - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR%
+  - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
 
 artifacts:
-  - path: emacs/
-    name: NTEmacs64 (%MAJOR%.%MINOR%)
+  - path: emacs26
+    name: ntemacs64-%MAJOR%.%MINOR%
 
-#deploy: off
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: smgA9XrXqqqHlyA1Df/T7xOYo6OcPi5974y8AxRJjlYLidg5mtCwCYEKLMQs8Dsx
+  artifact: /ntemacs64-.*\.zip/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true
 
