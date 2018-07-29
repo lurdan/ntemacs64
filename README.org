@@ -1,8 +1,37 @@
 #+TITLE: NTEmacs64 build
 [[https://ci.appveyor.com/project/lurdan/ntemacs64][https://ci.appveyor.com/api/projects/status/9v8jftjg2a6w4m2r?svg=true#.svg]]
 
-** feature
-- apply IME patch
-- apply disable IME patch
-- cmigemo included
+下記のニッチな要件を満たす、Windows 用の Emacs です
 
+** 要件/特徴
+*** Windows ネイティブ GUI 版
+WSL がある現在 Cygwin を使う理由はありませんし、WSL 版だと GUI が使えない、と痛し痒しなのです
+
+*** IME パッチ適用済み
+[[http://ftp.gnu.org/gnu/emacs/windows/][公式に配布されている Windows バイナリ]]は、IME の扱いに問題があるため、日本語入力に IME を使う人には[[https://gist.github.com/rzl24ozi/008d32c1f0742d3d2901295bf0366efa][このパッチ]]が必須なんだそうです
+
+*** IME 無効化パッチ適用済み
+IME パッチを適用したビルドは他にもいろいろあるのですが、一方でこの無効化パッチが適用されているものはほぼ見かけません
+
+SKK を使う場合、次の設定を追記しておけば、Emacs 上で間違って IME が有効になることを防げます
+#+BEGIN_SRC emacs-lisp
+(disable-w32-ime)
+#+END_SRC
+
+*** cmigemo 同梱
+cmigemo の Windows 版は、バイナリの供給が放置されがちなので、含めてしまっています (201807 時点では、[[https://github.com/mhatta/emacs-26-x86_64-win-ime#%E3%81%8A%E3%81%BE%E3%81%91-cmigemo][mhatta さんのバイナリ]]を流用)
+
+*** unzip するだけ
+自分でビルドしてね、とは言えない (ケースがある) のです
+
+** 使い方
+*** scoop を使っている場合
+[[https://github.com/lurdan/scoop-bucket][lurdan bucket]] を追加して、下記コマンドを実行してください
+#+BEGIN_SRC cmd
+scoop install ntemacs64
+#+END_SRC
+PATH 設定とショートカット作成も行われます
+
+*** zip をほどく場合
+release タブから該当の .zip ファイルをダウンロードして、好きな場所で展開してください
+PATH 設定とショートカットはお好みで。
