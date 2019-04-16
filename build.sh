@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 EMACSVER=${1:-26.2}
 TARGET=${2:-/c/emacs}
@@ -68,5 +69,3 @@ _extract
 _build
 _install
 _cmigemo
-
-exit 0
