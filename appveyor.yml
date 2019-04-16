@@ -18,6 +18,7 @@ cache:
   - src
 
 build_script:
+  - bash -lc "pacman --noconfirm -Syu"
   - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
 
 artifacts:

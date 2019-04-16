@@ -9,7 +9,7 @@ DEPLIBS="libffi libgcc_s_seh libgmp libhogweed libiconv libidn2 libintl libnettl
 DEPPKGS=$(echo mingw-w64-x86_64-{xpm-nox,libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls,lcms2,zlib,jansson})
 
 _prepare () {
-  pacman --noconfirm -Syu
+#  pacman --noconfirm -Syu
   pacman --needed --noconfirm -S base-devel unzip $DEPPKGS $DEPPKGS_PDF
 }
 
