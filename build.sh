@@ -1,10 +1,10 @@
 #!/bin/bash
 
-EMACSVER=${1:-26.1}
+EMACSVER=${1:-26.2}
 TARGET=${2:-/c/emacs}
 WORKDIR=${3:-~/tmp}
 
-DEPLIBS="libffi-6.dll libgcc_s_seh-1.dll libgmp-10.dll libhogweed-4.dll libiconv-2.dll libidn2-0.dll libintl-8.dll libnettle-6.dll libp11-kit-0.dll libtasn1-6.dll libunistring-2.dll libwinpthread-1.dll"
+DEPLIBS="libffi libgcc_s_seh libgmp libhogweed libiconv libidn2 libintl libnettle libp11-kit libtasn1 libunistring libwinpthread"
 DEPPKGS=$(echo mingw-w64-x86_64-{xpm-nox,libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls,lcms2,zlib,jansson})
 
 _prepare () {
@@ -40,6 +40,8 @@ _build () {
     LDFLAGS='-s' ./configure --prefix=$TARGET \
                 --host=x86_64-w64-mingw32 \
                 --with-wide-int \
+                --with-gnutls \
+                --with-xml2 \
                 --without-dbus \
                 --without-compress-install \
                 --with-json \
@@ -49,7 +51,7 @@ _build () {
 
 _install () {
   make install-strip
-  ( cd /mingw64/bin/; cp $DEPLIBS ${TARGET}/bin )
+  ( cd /mingw64/bin/; for LIB in $DEPLIBS; do cp ${LIB}-*.dll ${TARGET}/bin; done )
   cp $( pacman -Ql $DEPPKGS | awk '/bin\/.*\.dll$/{print $2}') ${TARGET}/bin
 }
 
@@ -66,4 +68,3 @@ _extract
 _build
 _install
 _cmigemo
-
