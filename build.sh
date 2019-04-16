@@ -42,9 +42,9 @@ _build () {
                 --with-wide-int \
                 --with-gnutls \
                 --with-xml2 \
+                --without-pop \
                 --without-dbus \
                 --without-compress-install \
-                --with-json \
                 --with-lcms2 \
                 --with-modules && make bootstrap
 }
@@ -68,3 +68,5 @@ _extract
 _build
 _install
 _cmigemo
+
+exit 0
