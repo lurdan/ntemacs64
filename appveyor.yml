@@ -20,6 +20,7 @@ cache:
 build_script:
   - bash -lc "pacman --noconfirm -Syu"
   - bash -lc "pacman --noconfirm -Syu"
+  - 'appveyor DownloadFile "https://ci.appveyor.com/api/projects/politza/pdf-tools/artifacts/epdfinfo.zip?branch=master" -FileName C:\epdfinfo.zip'
   - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
 
 artifacts:
