@@ -5,7 +5,7 @@ EMACSVER=${1:-26.2}
 TARGET=${2:-/c/emacs}
 WORKDIR=${3:-~/tmp}
 
-DEPLIBS="libtiff libgdk_pixbuf libglib libgobject libffi libgcc_s_seh libgcc_s_dw2 libgmp libhogweed libiconv libidn2 libintl libnettle libp11-kit libtasn1 libunistring libwinpthread"
+DEPLIBS="libtiff libgdk_pixbuf libglib libgobject libffi libgmp libhogweed libiconv libidn2 libintl libnettle libp11-kit libtasn1 libunistring libwinpthread"
 DEPPKGS=$(echo mingw-w64-x86_64-{xpm-nox,libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls,lcms2,zlib,jansson})
 
 _prepare () {
@@ -52,7 +52,7 @@ _build () {
 
 _install () {
   make install-strip
-  ( cd /mingw64/bin/; for LIB in $DEPLIBS; do cp ${LIB}-*.dll ${TARGET}/bin; done )
+  ( cd /mingw64/bin/; ls *.dll; for LIB in $DEPLIBS; do cp ${LIB}-*.dll ${TARGET}/bin; done; cp libgcc_s_*.dll ${TARGET}/bin )
   cp $( pacman -Ql $DEPPKGS | awk '/bin\/.*\.dll$/{print $2}') ${TARGET}/bin
 }
 
