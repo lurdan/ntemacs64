@@ -65,7 +65,7 @@ _cmigemo () {
 
 _pdftools () {
   cd ${TARGET}/bin
-  unzip -n src/epdfinfo.zip
+  unzip -n ${WORKDIR}/src/epdfinfo.zip
 }
 
 _prepare
