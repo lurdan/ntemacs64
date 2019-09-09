@@ -1,6 +1,6 @@
 environment:
   MAJOR: 26
-  MINOR: 2
+  MINOR: 3
   PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
 
   matrix:
