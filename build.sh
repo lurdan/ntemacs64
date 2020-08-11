@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-EMACSVER=${1:-26.2}
+EMACSVER=${1:-27.1}
 TARGET=${2:-/c/emacs}
 WORKDIR=${3:-~/tmp}
 
