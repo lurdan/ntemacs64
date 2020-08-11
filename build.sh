@@ -81,6 +81,6 @@ _extract
 _build
 _install
 _cmigemo
-_pdftools
+#_pdftools
 _dlls
 
