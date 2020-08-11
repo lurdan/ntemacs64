@@ -18,6 +18,9 @@ cache:
   - src
 
 build_script:
+  - bash -lc "rm -r /etc/pacman.d/gnupg/"
+  - bash -lc "pacman-key --init"
+  - bash -lc "pacman-key --populate msys2"
   - bash -lc "pacman --noconfirm -Syu"
   - bash -lc "pacman --noconfirm -Syu"
   - 'appveyor DownloadFile "https://ci.appveyor.com/api/projects/politza/pdf-tools/artifacts/epdfinfo.zip?branch=master" -FileName C:\Projects\ntemacs64\epdfinfo.zip'
