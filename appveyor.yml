@@ -31,7 +31,7 @@ build_script:
   - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
 
 artifacts:
-  - path: emacs26
+  - path: emacs%MAJOR%
     name: ntemacs64-%MAJOR%.%MINOR%
 
 deploy:

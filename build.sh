@@ -25,7 +25,7 @@ _fetch () {
 
 _extract () {
   cd ${WORKDIR}
-  tar zxf ${WORKDIR}/src/emacs-${EMACSVER}.tar.gz -C $WORKDIR
+  tar zxf ${WORKDIR}/src/emacs-${EMACSVER}.tar.gz --strip=1 -C $WORKDIR
 }
 
 _build () {
