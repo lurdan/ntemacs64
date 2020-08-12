@@ -18,8 +18,6 @@ _fetch () {
   curl -O http://ftp.gnu.org/gnu/emacs/emacs-${EMACSVER}.tar.gz
   curl -O http://ftp.gnu.org/gnu/emacs/emacs-${EMACSVER}.tar.gz.sig
 
-  curl -O https://gist.githubusercontent.com/rzl24ozi/ee4457df2f54c5f3ca0d02b56e371233/raw/16794e5883211049aed08c681f71240fa32cc28f/emacs-26.1-rc1-w32-ime.diff
-  curl -O https://gist.githubusercontent.com/rzl24ozi/da3370acb767096ce11fe867c6d9da6a/raw/1e0c1e44c9042b182e499f94fd0b5ebfc9cd94a7/emacs-26.1-rc1-disable-w32-ime.diff
   curl -O https://raw.githubusercontent.com/mhatta/emacs-26-x86_64-win-ime/master/cmigemo-1.3-mingw64-20180629.zip
   curl -fsSL -o gnutls.zip 'https://gitlab.com/gnutls/gnutls/-/jobs/491918191/artifacts/download?file_type=archive'
 #  mv ${WORKDIR}/epdfinfo.zip .
@@ -28,11 +26,6 @@ _fetch () {
 _extract () {
   cd ${WORKDIR}
   tar zxf ${WORKDIR}/src/emacs-${EMACSVER}.tar.gz -C $WORKDIR
-  cd ${WORKDIR}/emacs-*
-  for PATCH in $(ls -r ${WORKDIR}/src/*.diff)
-  do
-    patch -p0 < $PATCH
-  done
 }
 
 _build () {
