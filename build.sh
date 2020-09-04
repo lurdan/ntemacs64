@@ -7,6 +7,7 @@ WORKDIR=${3:-~/tmp}
 
 DEPLIBS="libtiff libgdk_pixbuf libglib libgobject libffi libgmp libhogweed libiconv libidn2 libintl libnettle libp11-kit libtasn1 libunistring libwinpthread"
 DEPPKGS=$(echo mingw-w64-x86_64-{toolchain,xpm-nox,libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls,lcms2,zlib,jansson})
+DEPPKGS_PDF=$(echo mingw-w64-x86_64-{poppler,imagemagick})
 
 _prepare () {
   pacman --needed --noconfirm -S base-devel unzip $DEPPKGS $DEPPKGS_PDF
@@ -20,7 +21,6 @@ _fetch () {
 
   curl -O https://raw.githubusercontent.com/mhatta/emacs-26-x86_64-win-ime/master/cmigemo-1.3-mingw64-20180629.zip
   curl -fsSL -o gnutls.zip 'https://gitlab.com/gnutls/gnutls/-/jobs/491918191/artifacts/download?file_type=archive'
-#  mv ${WORKDIR}/epdfinfo.zip .
 }
 
 _extract () {
@@ -58,8 +58,11 @@ _cmigemo () {
 }
 
 _pdftools () {
-  cd ${TARGET}/bin
-  unzip -n ${WORKDIR}/src/epdfinfo.zip
+  cd ${WORKDIR}
+  git clone https://github.com/politza/pdf-tools
+  cd pdf-tools
+  PATH=$PATH:${TARGET}/bin make server/epdfinfo
+  cp server/epdfinfo.exe ${TARGET}/bin
 }
 
 _dlls () {
@@ -74,6 +77,6 @@ _extract
 _build
 _install
 _cmigemo
-#_pdftools
+_pdftools
 _dlls
 
