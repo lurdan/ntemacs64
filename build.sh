@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-EMACSVER=${1:-27.1}
+EMACSVER=${1:-27.2}
 TARGET=${2:-/c/emacs}
 WORKDIR=${3:-~/tmp}
 
@@ -19,7 +19,7 @@ _fetch () {
   curl -O http://ftp.gnu.org/gnu/emacs/emacs-${EMACSVER}.tar.gz
   curl -O http://ftp.gnu.org/gnu/emacs/emacs-${EMACSVER}.tar.gz.sig
 
-  curl -O https://raw.githubusercontent.com/mhatta/emacs-26-x86_64-win-ime/master/cmigemo-1.3-mingw64-20180629.zip
+  curl -O https://raw.githubusercontent.com/mhatta/emacs-27-x86_64-win-ime/master/cmigemo-1.3-mingw64-20180629.zip
   curl -fsSL -o gnutls.zip 'https://gitlab.com/gnutls/gnutls/-/jobs/491918191/artifacts/download?file_type=archive'
 }
 
