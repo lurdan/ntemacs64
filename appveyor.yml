@@ -24,7 +24,7 @@ build_script:
   - bash -lc "rm -r /etc/pacman.d/gnupg/"
   - bash -lc "pacman-key --init"
   - bash -lc "pacman-key --populate msys2"
-  - bash -lc "pacman --noconfirm -Sydd pacman"
+#  - bash -lc "pacman --noconfirm -Sydd pacman"
   - bash -lc "pacman --noconfirm -S base"
   - bash -lc "pacman --noconfirm -Syu"
   - bash -lc "pacman --noconfirm -Syu"
