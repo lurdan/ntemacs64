@@ -18,12 +18,12 @@ cache:
   - src
 
 build_script:
-#  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
-#  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig"
-#  - bash -lc "pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
-#  - bash -lc "rm -r /etc/pacman.d/gnupg/"
-#  - bash -lc "pacman-key --init"
-#  - bash -lc "pacman-key --populate msys2"
+  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
+  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig"
+  - bash -lc "pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
+  - bash -lc "rm -r /etc/pacman.d/gnupg/"
+  - bash -lc "pacman-key --init"
+  - bash -lc "pacman-key --populate msys2"
   - bash -lc "pacman --noconfirm -Sydd pacman"
   - bash -lc "pacman --noconfirm -S base"
   - bash -lc "pacman --noconfirm -Syu"
