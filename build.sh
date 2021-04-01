@@ -10,7 +10,7 @@ DEPPKGS=$(echo mingw-w64-x86_64-{toolchain,xpm-nox,libtiff,giflib,libpng,libjpeg
 DEPPKGS_PDF=$(echo mingw-w64-x86_64-{poppler,imagemagick})
 
 _prepare () {
-  pacman --needed --noconfirm -S base-devel unzip $DEPPKGS $DEPPKGS_PDF
+  pacman --needed --noconfirm --refresh -S base-devel unzip $DEPPKGS $DEPPKGS_PDF
 }
 
 _fetch () {

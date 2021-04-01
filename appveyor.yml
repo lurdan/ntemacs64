@@ -24,10 +24,14 @@ build_script:
   - bash -lc "rm -r /etc/pacman.d/gnupg/"
   - bash -lc "pacman-key --init"
   - bash -lc "pacman-key --populate msys2"
-#  - bash -lc "pacman --noconfirm -Sydd pacman"
+  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/libzstd-1.4.4-2-x86_64.pkg.tar.xz
+  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/zstd-1.4.4-2-x86_64.pkg.tar.xz"
+  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/pacman-5.2.1-6-x86_64.pkg.tar.xz"
+#  - bash -lc "pacman --noconfirm -Syu"
+#  - bash -lc "pacman --noconfirm -S base"
   - bash -lc "pacman --noconfirm -Syu"
-  - bash -lc "pacman --noconfirm -S base"
-  - bash -lc "pacman --noconfirm -Syu"
+  - taskkill /f /fi "MODULES eq msys-2.0.dll"
+  - bash -lc "pacman --noconfirm -Syuu"
   - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
 
 artifacts:
