@@ -1,6 +1,6 @@
 environment:
-  MAJOR: 27
-  MINOR: 2
+  MAJOR: 28
+  MINOR: HEAD
   PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
 
   matrix:
@@ -14,8 +14,8 @@ branches:
   only:
     - master
 
-cache:
-  - src
+#cache:
+#  - src
 
 build_script:
   - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
