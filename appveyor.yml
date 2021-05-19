@@ -1,7 +1,7 @@
 environment:
   MAJOR: 28
   MINOR: HEAD
-  PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+#  PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
 
   matrix:
     - MSYS2_ARCH: x86_64
@@ -14,25 +14,28 @@ branches:
   only:
     - master
 
-#cache:
-#  - src
+cache:
+  - emacs-build/msys64
 
 build_script:
-  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
-  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig"
-  - bash -lc "pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
-  - bash -lc "rm -r /etc/pacman.d/gnupg/"
-  - bash -lc "pacman-key --init"
-  - bash -lc "pacman-key --populate msys2"
-  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/libzstd-1.4.4-2-x86_64.pkg.tar.xz
-  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/zstd-1.4.4-2-x86_64.pkg.tar.xz"
-  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/pacman-5.2.1-6-x86_64.pkg.tar.xz"
+#  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
+#  - bash -lc "curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig"
+#  - bash -lc "pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz"
+#  - bash -lc "rm -r /etc/pacman.d/gnupg/"
+#  - bash -lc "pacman-key --init"
+#  - bash -lc "pacman-key --populate msys2"
+#  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/libzstd-1.4.4-2-x86_64.pkg.tar.xz
+#  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/zstd-1.4.4-2-x86_64.pkg.tar.xz"
+#  - bash -lc "pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/pacman-5.2.1-6-x86_64.pkg.tar.xz"
+##  - bash -lc "pacman --noconfirm -Syu"
+##  - bash -lc "pacman --noconfirm -S base"
 #  - bash -lc "pacman --noconfirm -Syu"
-#  - bash -lc "pacman --noconfirm -S base"
-  - bash -lc "pacman --noconfirm -Syu"
-  - taskkill /f /fi "MODULES eq msys-2.0.dll"
-  - bash -lc "pacman --noconfirm -Syuu"
-  - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
+#  - taskkill /f /fi "MODULES eq msys-2.0.dll"
+#  - bash -lc "pacman --noconfirm -Syuu"
+#  - chcp 65001 && bash -ex build.sh %MAJOR%.%MINOR% /c/projects/ntemacs64/emacs%MAJOR% /c/projects/ntemacs64
+  - git clone --depth 1 https://github.com/juanjosegarciaripoll/emacs-build
+  - cd .\emacs-build
+  - emacs-build.cmd --slim --clone --deps --nativecomp --build --master --pack-all --patch /c/projects/ntemacs64/emacs-28-disable-w32-ime.diff
 
 artifacts:
   - path: emacs%MAJOR%
